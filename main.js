@@ -25,37 +25,37 @@ function recetario() {
                 { nombre: "Zucchini", cantidad: 50 }
             ]
         }
-    ];
+    ]
 
-    let consulta = confirm("Bienvenido a recetario,\nTe voy a ayudar a calcular los ingredientes para la receta que elijas");
+    let consulta = confirm("Bienvenido a recetario,\nTe voy a ayudar a calcular los ingredientes para la receta que elijas")
 
     if (consulta) {
-        let recetaEncontrada;
+        let recetaEncontrada
 
        do {
-            let receta = prompt("Ingresa una receta: \n 1. Risotto \n 2. Lasagna \n 3. Pasta");
+            let receta = prompt("Ingresa una receta: \n 1. Risotto \n 2. Lasagna \n 3. Pasta")
             receta = receta.toLowerCase()
-            let recetaEncontrada = recetas.find((r) => r.nombre === receta);
+            let recetaEncontrada = recetas.find((r) => r.nombre === receta)
 
             if (recetaEncontrada) {
-                let comensales = parseInt(prompt(`Para cuántas personas quieres cocinar ${receta}`));
-                alert(`Tengo la receta para cocinar ${receta}`);
+                let comensales = parseInt(prompt(`Para cuántas personas quieres cocinar ${receta}`))
+                alert(`Tengo la receta para cocinar ${receta}`)
 
-                let calcular = confirm(`¿Quieres que te calcule los ingredientes para ${comensales} personas?`);
+                let calcular = confirm(`¿Quieres que te calcule los ingredientes para ${comensales} personas?`)
                 if (calcular) {
-                    let mensaje = "Vas a necesitar:\n";
-                    recetaEncontrada.ingredientes.forEach(ingrediente => {
-                        let cantidadTotal = ingrediente.cantidad * comensales;
-                        mensaje += `${ingrediente.nombre}: ${cantidadTotal}gr\n`;
+                    let mensaje = "Vas a necesitar:\n"
+                    recetaEncontrada.ingredientes.forEach(i => {
+                        let cantidadTotal = i.cantidad * comensales
+                        mensaje += `${i.nombre}: ${cantidadTotal}gr\n`
                     });
                     alert(mensaje)
-                    alert("¡Que lo disfrutes!");
+                    alert("¡Que lo disfrutes!")
                 }
             } else {
-                alert("Lo siento, no tengo en mis registros la receta que estás buscando");
+                alert("Lo siento, no tengo en mis registros la receta que estás buscando")
             }
-        } while (recetas.nombre != recetaEncontrada);
+        } while (recetas)
     }
 }
 
-recetario();
+recetario()
