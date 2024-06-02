@@ -1,13 +1,12 @@
-let recetaSeleccionada = "";
+let recetaSeleccionada = ""
 let carrito = []
 
-document.getElementById('calcular').addEventListener('click', calcularIngredientes);
-document.getElementById('eliminarCarrito').addEventListener('click', eliminarCarrito);
-//document.getElementById("eliminarBusqueda").addEventListener("click", eliminarBusqueda)
+document.getElementById("calcular").addEventListener("click", calcularIngredientes)
+document.getElementById("eliminarCarrito").addEventListener("click", eliminarCarrito)
 
 function seleccionarReceta(receta) {
-    recetaSeleccionada = receta;
-    document.getElementById("recetaElegida").innerText = `Has seleccionado: ${recetaSeleccionada}`;
+    recetaSeleccionada = receta
+    document.getElementById("recetaElegida").innerText = `Has seleccionado: ${recetaSeleccionada}`
 }
 
 const recetas = [
@@ -35,104 +34,87 @@ const recetas = [
             { nombre: "Zucchini", cantidad: 50, precio: 1.0 }
         ]
     }
-];
+]
 
 
-// Función para guardar recetas favoritas en localStorage
 function guardarRecetasFavoritas(favoritas) {
-    localStorage.setItem('favoritas', JSON.stringify(favoritas));
+    localStorage.setItem("favoritas", JSON.stringify(favoritas))
 }
 
-// Función para obtener recetas favoritas desde localStorage
 function obtenerRecetasFavoritas() {
-    const favoritasJSON = localStorage.getItem('favoritas');
-    return favoritasJSON ? JSON.parse(favoritasJSON) : [];
+    const favoritasJSON = localStorage.getItem("favoritas")
+    return favoritasJSON ? JSON.parse(favoritasJSON) : []
 }
 
-// Función para crear los botones de recetas
 function crearBotonesDeRecetas(recetas) {
-    // Selecciona el contenedor donde se añadirán los botones
-    const contenedor = document.getElementById('contenedor-botones');
-    contenedor.innerHTML = ''; // Limpiar el contenedor
+    const contenedor = document.getElementById("contenedor-botones")
+    contenedor.innerHTML = ""
 
-    // Obtener recetas favoritas
     const favoritas = obtenerRecetasFavoritas();
 
-    // Itera sobre cada receta
     recetas.forEach(receta => {
-        // Crea un contenedor para cada receta
-        const contenedorReceta = document.createElement('div');
+        const contenedorReceta = document.createElement("div")
         contenedorReceta.classList.add("px-3")
-        // Crea un elemento botón para la receta
-        const botonReceta = document.createElement('button');
-        botonReceta.textContent = receta.nombre;
-        botonReceta.classList.add("rounded-pill", "btn" );
-        // Añade el botón de receta al contenedor de receta
-        contenedorReceta.appendChild(botonReceta);
+        const botonReceta = document.createElement("button")
+        botonReceta.textContent = receta.nombre
+        botonReceta.classList.add("rounded-pill", "btn" )
+        contenedorReceta.appendChild(botonReceta)
 
-        // Crea un elemento botón para marcar como favorito
-        const botonFavorito = document.createElement('button');
-        botonFavorito.textContent = '★';
-        botonFavorito.classList.add("boton-favorito");
-        // Si la receta es favorita, añade una clase especial
+        const botonFavorito = document.createElement("button")
+        botonFavorito.textContent = "★"
+        botonFavorito.classList.add("boton-favorito")
         if (favoritas.includes(receta.nombre)) {
-            botonFavorito.classList.add('seleccionado');
+            botonFavorito.classList.add("seleccionado")
         }
-        // Añade evento de click para marcar como favorito
-        botonFavorito.addEventListener('click', () => {
-            toggleFavorito(receta.nombre);
-            crearBotonesDeRecetas(recetas);
+        botonFavorito.addEventListener("click", () => {
+            toggleFavorito(receta.nombre)
+            crearBotonesDeRecetas(recetas)
         });
 
         
-        // Añade el botón de favorito al contenedor de receta
-        contenedorReceta.appendChild(botonFavorito);
-        // Añade el contenedor de receta al contenedor principal
-        contenedor.appendChild(contenedorReceta);
+        contenedorReceta.appendChild(botonFavorito)
+        contenedor.appendChild(contenedorReceta)
 
-       
-
-        botonReceta.addEventListener('click', () => {
-            seleccionarReceta(receta.nombre);})
-    });
+        botonReceta.addEventListener("click", () => {
+            seleccionarReceta(receta.nombre)
+        })
+    })
 }
 
-// Función para marcar/desmarcar una receta como favorita
 function toggleFavorito(nombreReceta) {
-    let favoritas = obtenerRecetasFavoritas();
+    let favoritas = obtenerRecetasFavoritas()
     if (favoritas.includes(nombreReceta)) {
-        favoritas = favoritas.filter(nombre => nombre !== nombreReceta);
+        favoritas = favoritas.filter(nombre => nombre !== nombreReceta)
     } else {
-        favoritas.push(nombreReceta);
+        favoritas.push(nombreReceta)
     }
-    guardarRecetasFavoritas(favoritas);
+    guardarRecetasFavoritas(favoritas)
 }
 
-// Crear botones de recetas con las recetas obtenidas desde el array
-crearBotonesDeRecetas(recetas);
+crearBotonesDeRecetas(recetas)
 
 
 function calcularIngredientes() {
-    let receta = recetaSeleccionada;
-    let recetaEncontrada = recetas.find((r) => r.nombre === receta);
+    let receta = recetaSeleccionada
+    let recetaEncontrada = recetas.find((r) => r.nombre === receta)
 
     if (!recetaEncontrada) {
-        document.getElementById("mensaje").innerText = "Por favor, selecciona una receta antes de calcular los ingredientes.";
+        document.getElementById("mensaje").innerText = "Por favor, selecciona una receta antes de calcular los ingredientes."
         return;
     }
 
-    let comensales = parseInt(document.getElementById("comensales").value);
+    let comensales = parseInt(document.getElementById("comensales").value)
     if (isNaN(comensales) || comensales <= 0) {
-        document.getElementById("mensaje").innerText = "Por favor, ingresa un número válido de personas.";
+        document.getElementById("mensaje").innerText = "Por favor, ingresa un número válido de personas."
         return;
     }
 
-    let mensaje = "Vas a necesitar:\n";
-    let ingredientesDiv = document.getElementById("ingredientes");
-    ingredientesDiv.innerHTML = ""; // borrar busqueda anterior
+    let mensaje = "Vas a necesitar:\n"
+    let ingredientesDiv = document.getElementById("ingredientes")
+    ingredientesDiv.innerHTML = ""
 
     recetaEncontrada.ingredientes.forEach(i => {
-        let cantidadTotal = i.cantidad * comensales;
+        let cantidadTotal = i.cantidad * comensales
         let ingredienteHTML = `
         
         <div class="row py-2 px-5">
@@ -144,62 +126,51 @@ function calcularIngredientes() {
                 <button class="fa-solid fa-cart-shopping btnNone agregar-carrito" data-nombre="${i.nombre}" data-cantidad="${cantidadTotal}" data-precio="${i.precio}"></button>
             </div>
         </div>`
-        ingredientesDiv.innerHTML += ingredienteHTML;
-    });
+        ingredientesDiv.innerHTML += ingredienteHTML
+    })
 
-    document.getElementById("mensaje").innerText = mensaje;
+    document.getElementById("mensaje").innerText = mensaje
 
-    // Agrego eventlisteners a botones "Agregar al carrito"
-    document.querySelectorAll('.agregar-carrito').forEach(button => {
-        button.addEventListener('click', (e) => {
-            let nombre = e.target.getAttribute('data-nombre');
-            let cantidad = parseInt(e.target.getAttribute('data-cantidad'));
-            let precio = parseFloat(e.target.getAttribute('data-precio'));
-            agregarAlCarrito(nombre, cantidad, precio);
-        });
-    });
+    document.querySelectorAll(".agregar-carrito").forEach(button => {
+        button.addEventListener("click", (e) => {
+            let nombre = e.target.getAttribute("data-nombre")
+            let cantidad = parseInt(e.target.getAttribute("data-cantidad"))
+            let precio = parseFloat(e.target.getAttribute("data-precio"))
+            agregarAlCarrito(nombre, cantidad, precio)
+        })
+    })
 }
 
 function agregarAlCarrito(nombre, cantidad, precio) {
-    let ingredienteEnCarrito = carrito.find(item => item.nombre === nombre);
+    let ingredienteEnCarrito = carrito.find(item => item.nombre === nombre)
     if (ingredienteEnCarrito) {
-        ingredienteEnCarrito.cantidad = cantidad;
-        ingredienteEnCarrito.numIngredientes += 1;
-        ingredienteEnCarrito.precio += precio;
+        ingredienteEnCarrito.cantidad = cantidad
+        ingredienteEnCarrito.numIngredientes += 1
+        ingredienteEnCarrito.precio += precio
     } else {
-        carrito.push({ nombre: nombre, cantidad: cantidad, numIngredientes: 1, precio: precio });
+        carrito.push({ nombre: nombre, cantidad: cantidad, numIngredientes: 1, precio: precio })
     }
-    actualizarCarrito();
+    actualizarCarrito()
 
 }
 
 function actualizarCarrito() {
-    let carritoDiv = document.getElementById("carrito");
-    carritoDiv.innerHTML = "";
-    let total = 0;
+    let carritoDiv = document.getElementById("carrito")
+    carritoDiv.innerHTML = ""
+    let total = 0
     carrito.forEach(ingrediente => {
-        let precioTotal = ingrediente.numIngredientes * ingrediente.precio;
-        total += precioTotal;
-        carritoDiv.innerHTML += `<div class="py-2"><h4>${ingrediente.nombre}</h4><p>${ingrediente.cantidad} Gr X ${ingrediente.numIngredientes} = $${precioTotal.toFixed(2)}</div></p>`;
-    });
-    document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
+        let precioTotal = ingrediente.numIngredientes * ingrediente.precio
+        total += precioTotal
+        carritoDiv.innerHTML += `<div class="py-2"><h4>${ingrediente.nombre}</h4><p>${ingrediente.cantidad} Gr X ${ingrediente.numIngredientes} = $${precioTotal.toFixed(2)}</div></p>`
+    })
+    document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`
 }
 
 function eliminarCarrito() {
-    carrito = [];
-    total = []
-    actualizarCarrito();
+    carrito = []
+    actualizarCarrito()
 }
-/* 
-function eliminarBusqueda(){
-    recetaEncontrada = ""
-    ingredienteHTML = ""
-    seleccionarReceta()
-} */
 
-
-
-//////////DARK MODE/////////////////
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const body = document.body
