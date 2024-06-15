@@ -1,99 +1,75 @@
 let recetaSeleccionada = ""
 let carrito = []
+let recetas = []
 
 document.getElementById("calcular").addEventListener("click", calcularIngredientes)
 document.getElementById("eliminarCarrito").addEventListener("click", eliminarCarrito)
+document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra)
 
 function seleccionarReceta(receta) {
     recetaSeleccionada = receta
-    document.getElementById("recetaElegida").innerText = `Has seleccionado: ${recetaSeleccionada}`
+    document.getElementById("recetaElegida").innerText = `${recetaSeleccionada}`
 }
 
-const recetas = [
-    {
-        nombre: "risotto",
-        ingredientes: [
-            { nombre: "Arroz", cantidad: 75, precio: 0.5 },
-            { nombre: "Champignones", cantidad: 40, precio: 1.0 },
-            { nombre: "Cebolla", cantidad: 12, precio: 0.3 }
-        ]
-    },
-    {
-        nombre: "lasagna",
-        ingredientes: [
-            { nombre: "Pasta", cantidad: 200, precio: 1.5 },
-            { nombre: "Carne picada", cantidad: 150, precio: 3.0 },
-            { nombre: "Vegetales", cantidad: 100, precio: 2.0 }
-        ]
-    },
-    {
-        nombre: "pasta",
-        ingredientes: [
-            { nombre: "Espagueti", cantidad: 100, precio: 1.2 },
-            { nombre: "Salsa de tomate", cantidad: 80, precio: 0.8 },
-            { nombre: "Zucchini", cantidad: 50, precio: 1.0 }
-        ]
-    }
-]
 
-
-function guardarRecetasFavoritas(favoritas) {
-    localStorage.setItem("favoritas", JSON.stringify(favoritas))
+fetch("./json/recetas.json")
+    .then((response) => response.json()) // Convierto todo el JSON en objeto
+    .then(data => {
+        recetas = data.recetas
+        init(); // Llama a la función inicial que necesite los datos
+})
+.catch(error => {
+    console.log("Error:", error);
+});
+    
+function init() {
+    crearBotonesDeRecetas(recetas);
+    crearBotonesMenu();
 }
 
-function obtenerRecetasFavoritas() {
-    const favoritasJSON = localStorage.getItem("favoritas")
-    return favoritasJSON ? JSON.parse(favoritasJSON) : []
-}
 
 function crearBotonesDeRecetas(recetas) {
-    const contenedor = document.getElementById("contenedor-botones")
+    const contenedor = document.getElementById("contenedor")
     contenedor.innerHTML = ""
 
     const favoritas = obtenerRecetasFavoritas();
 
     recetas.forEach(receta => {
-        const contenedorReceta = document.createElement("div")
-        contenedorReceta.classList.add("px-3")
-        const botonReceta = document.createElement("button")
-        botonReceta.textContent = receta.nombre
-        botonReceta.classList.add("rounded-pill", "btn" )
-        contenedorReceta.appendChild(botonReceta)
+        const contenedorCard = document.createElement("div")
+        contenedorCard.classList.add("col-12","col-sm-6","col-md-4","p-3","text-center")
 
+        const card = document.createElement("div")
+        card.classList.add("bg-dark-mode","shadow","rounded-3","p-3","h-100","align-content-center","position-relative") //ACA DEBERIA GREGAR LA IMAGEN DE FONDO
+        card.innerHTML = `
+                    <button type="button" class="btnNone bg-dark-mode" data-bs-toggle="modal" data-bs-target="#exampleModal">${receta.nombre}</button>
+                    `
+       
         const botonFavorito = document.createElement("button")
         botonFavorito.textContent = "★"
         botonFavorito.classList.add("boton-favorito")
-        if (favoritas.includes(receta.nombre)) {
+
+        if(favoritas.includes(receta.nombre)) {
             botonFavorito.classList.add("seleccionado")
         }
+
         botonFavorito.addEventListener("click", () => {
             toggleFavorito(receta.nombre)
             crearBotonesDeRecetas(recetas)
         });
 
-        
-        contenedorReceta.appendChild(botonFavorito)
-        contenedor.appendChild(contenedorReceta)
+        contenedor.appendChild(contenedorCard)  
+        contenedorCard.appendChild(card)
+        card.appendChild(botonFavorito)
 
-        botonReceta.addEventListener("click", () => {
+        card.addEventListener("click", () => {
             seleccionarReceta(receta.nombre)
+            limpiarModal()        
         })
-    })
+        
+    });
 }
 
-function toggleFavorito(nombreReceta) {
-    let favoritas = obtenerRecetasFavoritas()
-    if (favoritas.includes(nombreReceta)) {
-        favoritas = favoritas.filter(nombre => nombre !== nombreReceta)
-    } else {
-        favoritas.push(nombreReceta)
-    }
-    guardarRecetasFavoritas(favoritas)
-}
-
-crearBotonesDeRecetas(recetas)
-
-
+////////////////CALCULAR INGREDIENTES////////////////
 function calcularIngredientes() {
     let receta = recetaSeleccionada
     let recetaEncontrada = recetas.find((r) => r.nombre === receta)
@@ -116,31 +92,42 @@ function calcularIngredientes() {
     recetaEncontrada.ingredientes.forEach(i => {
         let cantidadTotal = i.cantidad * comensales
         let ingredienteHTML = `
-        
         <div class="row py-2 px-5">
             <div class="col-10 text-start">
                 <h5 class="p-0 m-0">${i.nombre}: ${cantidadTotal}gr</h5>
                 <p class="p-0 m-0">$${i.precio.toFixed(2)} por unidad</p>
             </div>
             <div class="col-2 text-center">
-                <button class="fa-solid fa-cart-shopping btnNone agregar-carrito" data-nombre="${i.nombre}" data-cantidad="${cantidadTotal}" data-precio="${i.precio}"></button>
+                <i class="fa-solid fa-circle-plus btnNone agregar-carrito" data-nombre="${i.nombre}" data-cantidad="${cantidadTotal}" data-precio="${i.precio}"></i>
             </div>
-        </div>`
-        ingredientesDiv.innerHTML += ingredienteHTML
-    })
-
-    document.getElementById("mensaje").innerText = mensaje
+        </div>
+        `
+        ingredientesDiv.innerHTML += ingredienteHTML;
+    });
 
     document.querySelectorAll(".agregar-carrito").forEach(button => {
         button.addEventListener("click", (e) => {
-            let nombre = e.target.getAttribute("data-nombre")
-            let cantidad = parseInt(e.target.getAttribute("data-cantidad"))
-            let precio = parseFloat(e.target.getAttribute("data-precio"))
-            agregarAlCarrito(nombre, cantidad, precio)
-        })
-    })
+
+            let nombre = e.target.getAttribute("data-nombre");
+            let cantidad = parseInt(e.target.getAttribute("data-cantidad"));
+            let precio = parseFloat(e.target.getAttribute("data-precio"));
+
+            Toastify({
+                text: `Agregaste ${nombre} al carrito`,
+                duration: 3000
+            }).showToast();
+
+            agregarAlCarrito(nombre, cantidad, precio);
+        });
+    });
+
+    document.getElementById("mensaje").innerText = mensaje;
 }
 
+
+
+
+///////////////////CARRITO/////////////////
 function agregarAlCarrito(nombre, cantidad, precio) {
     let ingredienteEnCarrito = carrito.find(item => item.nombre === nombre)
     if (ingredienteEnCarrito) {
@@ -158,47 +145,164 @@ function actualizarCarrito() {
     let carritoDiv = document.getElementById("carrito")
     carritoDiv.innerHTML = ""
     let total = 0
+
     carrito.forEach(ingrediente => {
         let precioTotal = ingrediente.numIngredientes * ingrediente.precio
         total += precioTotal
         carritoDiv.innerHTML += `<div class="py-2"><h4>${ingrediente.nombre}</h4><p>${ingrediente.cantidad} Gr X ${ingrediente.numIngredientes} = $${precioTotal.toFixed(2)}</div></p>`
     })
+
     document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`
+    botonFinalizarCompra()
 }
 
 function eliminarCarrito() {
+Swal.fire({
+  //title: "Estas seguro?",
+  text: "Queres eliminar todos los productos?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "si, Eliminar"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      //title: "Deleted!",
+      text: "Eliminaste todos los productos",
+      icon: "success"
+    });
     carrito = []
-    actualizarCarrito()
+    actualizarCarrito();
+  }
+});
+
+}
+
+function botonFinalizarCompra(){
+
+    const contenedor = document.getElementById("finalizarCompra")
+    contenedor.innerHTML = ""
+
+        const botonFinalizar = document.createElement("button")
+        botonFinalizar.classList.add("btn","btn-primary","rounded-pill","w-100","my-2")
+        botonFinalizar.textContent="Finalizar Compra"
+        contenedor.appendChild(botonFinalizar)
+
+        //-------------ESTE IF TENDRIA QUE HACERLO TERNARIO-----------------------------
+/*         if (carrito.length > 0) {
+            botonFinalizar.style.display = 'block';
+        } else {
+            botonFinalizar.style.display = 'none';
+        } */
+        botonFinalizar.style.display = carrito.length > 0 ? 'block' : 'none';
+}
+
+function finalizarCompra() {
+
+    let timerInterval;
+    Swal.fire({
+    title: "Gracias por tu compra!",
+    html: "Te enviamos un correo con informacion del envio de tus productos, Pronto podrás disfrutarlos",
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading();
+        const timer = Swal.getPopup().querySelector("b");
+        timerInterval = setInterval(() => {
+        timer.textContent = `${Swal.getTimerLeft()}`;
+        }, 100);
+    },
+    willClose: () => {
+        clearInterval(timerInterval);
+    }
+    }).then((result) => {
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+    }
+    });
+
+    carrito = []
+    actualizarCarrito();
+}
+
+///////////////////FAVORITO/////////////////
+
+
+function guardarRecetasFavoritas(favoritas) {
+    localStorage.setItem("favoritas", JSON.stringify(favoritas))
+}
+
+function obtenerRecetasFavoritas() {
+    const favoritasJSON = localStorage.getItem("favoritas")
+    return favoritasJSON ? JSON.parse(favoritasJSON) : []
+}
+
+function toggleFavorito(nombreReceta) {
+    let favoritas = obtenerRecetasFavoritas()
+    if (favoritas.includes(nombreReceta)) {
+        favoritas = favoritas.filter(nombre => nombre !== nombreReceta)
+    } else {
+        favoritas.push(nombreReceta)
+    }
+    guardarRecetasFavoritas(favoritas)
 }
 
 
-document.addEventListener("DOMContentLoaded", (event) => {
-    const body = document.body
-    const botonToggle = document.getElementById("toggleButton")
 
-    function aplicarModoOscuro(estaOscuro) {
-        if(estaOscuro) {
-            body.classList.add("dark-mode")
-        }else {
-            body.classList.remove("dark-mode")
+
+
+
+///////////////////FILTRAR/////////////////
+
+function crearBotonesMenu() {
+    const contenedor = document.getElementById("contenedor-menu")
+    contenedor.innerHTML = ""
+
+        const botonMostrarTodos = document.createElement("button");
+        botonMostrarTodos.classList.add("rounded-pill", "btn", "btn-primary", "m-2");
+        botonMostrarTodos.textContent = "Todos";
+        contenedor.appendChild(botonMostrarTodos);
+    
+        botonMostrarTodos.addEventListener('click', () => {
+            crearBotonesDeRecetas(recetas);
+        });
+
+    const tiposDeMenu = new Set();
+
+    recetas.forEach(receta => {
+        if (!tiposDeMenu.has(receta.tipoMenu)) {
+            tiposDeMenu.add(receta.tipoMenu);
+
+   
+        const botonMenu = document.createElement("button")
+        botonMenu.classList.add("rounded-pill", "btn", "btn-primary", "m-2")
+        botonMenu.textContent = receta.tipoMenu
+
+        contenedor.appendChild(botonMenu)
+
+        botonMenu.addEventListener('click', () => {
+            const menuBuscado = receta.tipoMenu
+            const resultado = filtrarTipoMenu(menuBuscado);
+            crearBotonesDeRecetas(resultado)
+
+        
+            })
         }
-    }
+    });
+}
 
-    function alternarModoOscuro() {
-        const estaEnModoOscuro = body.classList.toggle("dark-mode")
-        localStorage.setItem("modoOscuro", estaEnModoOscuro ? "habilitado" : "deshabilitado")
-    }
+function filtrarTipoMenu(menuBuscado) {
+    return recetas.filter(menu => menu.tipoMenu === menuBuscado);
+}
 
-    function inicializarModoOscuro() {
-        const modoOscuroGuardado = localStorage.getItem("modoOscuro")
-        if (modoOscuroGuardado === "habilitado") {
-            aplicarModoOscuro(true)
-        } else {
-            aplicarModoOscuro(false)
-        }
-    }
 
-    inicializarModoOscuro()
 
-    botonToggle.addEventListener("click", alternarModoOscuro)
-})
+/////////////////77LIMPIAR MODAL//////////////////
+
+function limpiarModal(){
+    document.getElementById("comensales").value = ""
+    document.getElementById("mensaje").innerHTML = ""
+    document.getElementById("ingredientes").innerHTML = ""
+
+}

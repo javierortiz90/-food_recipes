@@ -1,0 +1,442 @@
+{
+  "recetas": [
+  {
+    "nombre": "Risotto",
+    "tipoMenu": "Cena",
+    "ingredientes": [
+      {
+        "nombre": "Arroz",
+        "cantidad": 75,
+        "precio": 0.5
+      },
+      {
+        "nombre": "Champignones",
+        "cantidad": 40,
+        "precio": 1
+      },
+      {
+        "nombre": "Cebolla",
+        "cantidad": 12,
+        "precio": 0.3
+      }
+    ]
+  },
+  {
+    "nombre": "Lasagna",
+    "tipoMenu": "Cena",
+    "ingredientes": [
+      {
+        "nombre": "Pasta",
+        "cantidad": 200,
+        "precio": 1.5
+      },
+      {
+        "nombre": "Carne picada",
+        "cantidad": 150,
+        "precio": 3
+      },
+      {
+        "nombre": "Vegetales",
+        "cantidad": 100,
+        "precio": 2
+      }
+    ]
+  },
+  {
+    "nombre": "Pasta",
+    "tipoMenu": "Cena",
+    "ingredientes": [
+      {
+        "nombre": "Espagueti",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Salsa de tomate",
+        "cantidad": 80,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Zucchini",
+        "cantidad": 50,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Torta",
+    "tipoMenu": "Merienda",
+    "ingredientes": [
+      {
+        "nombre": "Espagueti",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Salsa de tomate",
+        "cantidad": 80,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Zucchini",
+        "cantidad": 50,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Paqueque",
+    "tipoMenu": "Desayuno",
+    "ingredientes": [
+      {
+        "nombre": "Espagueti",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Salsa de tomate",
+        "cantidad": 80,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Zucchini",
+        "cantidad": 50,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Carpaccio de Pepino",
+    "tipoMenu": "Cena",
+    "ingredientes": [
+      {
+        "nombre": "Sardinas",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Queso de Cabra",
+        "cantidad": 75,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Alcaparras",
+        "cantidad": 20,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Pure",
+    "tipoMenu": "Cena",
+    "ingredientes": [
+      {
+        "nombre": "Papa",
+        "cantidad": 200,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Manteca",
+        "cantidad": 20,
+        "precio": 0.8
+      }
+    ]
+  },
+  {
+    "nombre": "Tarta",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Jamon",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Queso",
+        "cantidad": 75,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Tomate",
+        "cantidad": 100,
+        "precio": 1
+      },
+      {
+        "nombre": "Aceitunas",
+        "cantidad": 10,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Ensalada con Naranja",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Escarola",
+        "cantidad": 50,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Rucula",
+        "cantidad": 10,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Queso en ebras",
+        "cantidad": 70,
+        "precio": 1
+      },
+      {
+        "nombre": "pistacho",
+        "cantidad": 10,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Ensalada Cesar",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Pollo",
+        "cantidad": 125,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Espinaca",
+        "cantidad": 400,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Queso Parmesano",
+        "cantidad": 75,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Crema de Zanahoria",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Zanahorias",
+        "cantidad": 100,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Manteca",
+        "cantidad": 10,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Queso Parmesano",
+        "cantidad": 10,
+        "precio": 1
+      },
+      {
+        "nombre": "Piñones",
+        "cantidad": 5,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Puré de Coliflor",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Coliflor",
+        "cantidad": 50,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Judias Verdes",
+        "cantidad": 25,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Salmon Ahumado",
+        "cantidad": 25,
+        "precio": 1
+      },
+      {
+        "nombre": "Manteca",
+        "cantidad": 50,
+        "precio": 1
+      },
+      {
+        "nombre": "Yogur Griego",
+        "cantidad": 25,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Ensalada de Pavo",
+    "tipoMenu": "Almuerzo",
+    "ingredientes": [
+      {
+        "nombre": "Pavo",
+        "cantidad": 60,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Lechuga",
+        "cantidad": 35,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Queso de Bola",
+        "cantidad": 50,
+        "precio": 1
+      },
+      {
+        "nombre": "Rucula",
+        "cantidad": 10,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Milhojas de frutas",
+    "tipoMenu": "Postre",
+    "ingredientes": [
+      {
+        "nombre": "Sandia",
+        "cantidad": 60,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Yogurt",
+        "cantidad": 50,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Nueces Peladas",
+        "cantidad": 10,
+        "precio": 1
+      },
+      {
+        "nombre": "Melon",
+        "cantidad": 50,
+        "precio": 1
+      },
+      {
+        "nombre": "Kiwi",
+        "cantidad": 50,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Muffins",
+    "tipoMenu": "Desayuno",
+    "ingredientes": [
+      {
+        "nombre": "Manteca",
+        "cantidad": 25,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Azucar Mascabo",
+        "cantidad": 35,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Harina Integral",
+        "cantidad": 25,
+        "precio": 1
+      },
+      {
+        "nombre": "Coco",
+        "cantidad": 15,
+        "precio": 1
+      },
+      {
+        "nombre": "Maizena",
+        "cantidad": 10,
+        "precio": 1
+      }
+    ]
+  },
+  {
+    "nombre": "Wafles",
+    "tipoMenu": "Merienda",
+    "ingredientes": [
+      {
+        "nombre": "Harina de Avena",
+        "cantidad": 25,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Azucar",
+        "cantidad": 10,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Polvo para Hornear",
+        "cantidad": 5,
+        "precio": 0.8
+      }
+    ]
+  },
+  {
+    "nombre": "Trufas de Frambuesa",
+    "tipoMenu": "Postre",
+    "ingredientes": [
+      {
+        "nombre": "Chocolate Negro",
+        "cantidad": 25,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Azucar Glase",
+        "cantidad": 5,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Manteca",
+        "cantidad": 10,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Frambuesas",
+        "cantidad": 10,
+        "precio": 0.8
+      }
+    ]
+  },
+  {
+    "nombre": "Galletas",
+    "tipoMenu": "Merienda",
+    "ingredientes": [
+      {
+        "nombre": "Harina",
+        "cantidad": 50,
+        "precio": 1.2
+      },
+      {
+        "nombre": "Azucar",
+        "cantidad": 50,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Manteca",
+        "cantidad": 10,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Chips de Chocolate",
+        "cantidad": 60,
+        "precio": 0.8
+      },
+      {
+        "nombre": "Panela",
+        "cantidad": 20,
+        "precio": 0.8
+      }
+    ]
+  }
+]
+}
