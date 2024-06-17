@@ -11,22 +11,20 @@ function seleccionarReceta(receta) {
     document.getElementById("recetaElegida").innerText = `${recetaSeleccionada}`
 }
 
-
 fetch("./json/recetas.json")
-    .then((response) => response.json()) // Convierto todo el JSON en objeto
+    .then((response) => response.json())
     .then(data => {
         recetas = data.recetas
-        init(); // Llama a la función inicial que necesite los datos
+        inicial()
 })
 .catch(error => {
-    console.log("Error:", error);
+    console.log("Error:", error)
 });
     
-function init() {
-    crearBotonesDeRecetas(recetas);
-    crearBotonesMenu();
+function inicial() {
+    crearBotonesDeRecetas(recetas)
+    crearBotonesMenu()
 }
-
 
 function crearBotonesDeRecetas(recetas) {
     const contenedor = document.getElementById("contenedor")
@@ -39,9 +37,10 @@ function crearBotonesDeRecetas(recetas) {
         contenedorCard.classList.add("col-12","col-sm-6","col-md-4","p-3","text-center")
 
         const card = document.createElement("div")
-        card.classList.add("bg-dark-mode","shadow","rounded-3","p-3","h-100","align-content-center","position-relative") //ACA DEBERIA GREGAR LA IMAGEN DE FONDO
+        card.classList.add("bg-dark-mode","shadow","rounded-3","p-3","align-content-center","position-relative","objectFitCover","card-height") 
+        card.style.backgroundImage = `url(${receta.imagen})`
         card.innerHTML = `
-                    <button type="button" class="btnNone bg-dark-mode" data-bs-toggle="modal" data-bs-target="#exampleModal">${receta.nombre}</button>
+                    <button type="button" class="text-light btnNone" data-bs-toggle="modal" data-bs-target="#exampleModal">${receta.nombre}</button>
                     `
        
         const botonFavorito = document.createElement("button")
@@ -66,10 +65,9 @@ function crearBotonesDeRecetas(recetas) {
             limpiarModal()        
         })
         
-    });
+    })
 }
 
-////////////////CALCULAR INGREDIENTES////////////////
 function calcularIngredientes() {
     let receta = recetaSeleccionada
     let recetaEncontrada = recetas.find((r) => r.nombre === receta)
@@ -102,32 +100,28 @@ function calcularIngredientes() {
             </div>
         </div>
         `
-        ingredientesDiv.innerHTML += ingredienteHTML;
+        ingredientesDiv.innerHTML += ingredienteHTML
     });
 
     document.querySelectorAll(".agregar-carrito").forEach(button => {
         button.addEventListener("click", (e) => {
 
-            let nombre = e.target.getAttribute("data-nombre");
-            let cantidad = parseInt(e.target.getAttribute("data-cantidad"));
-            let precio = parseFloat(e.target.getAttribute("data-precio"));
+            let nombre = e.target.getAttribute("data-nombre")
+            let cantidad = parseInt(e.target.getAttribute("data-cantidad"))
+            let precio = parseFloat(e.target.getAttribute("data-precio"))
 
             Toastify({
                 text: `Agregaste ${nombre} al carrito`,
-                duration: 3000
+                duration: 1000
             }).showToast();
 
             agregarAlCarrito(nombre, cantidad, precio);
         });
     });
 
-    document.getElementById("mensaje").innerText = mensaje;
+    document.getElementById("mensaje").innerText = mensaje
 }
 
-
-
-
-///////////////////CARRITO/////////////////
 function agregarAlCarrito(nombre, cantidad, precio) {
     let ingredienteEnCarrito = carrito.find(item => item.nombre === nombre)
     if (ingredienteEnCarrito) {
@@ -157,30 +151,26 @@ function actualizarCarrito() {
 }
 
 function eliminarCarrito() {
-Swal.fire({
-  //title: "Estas seguro?",
-  text: "Queres eliminar todos los productos?",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "si, Eliminar"
-}).then((result) => {
-  if (result.isConfirmed) {
     Swal.fire({
-      //title: "Deleted!",
-      text: "Eliminaste todos los productos",
-      icon: "success"
+    text: "Queres eliminar todos los productos?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "si, Eliminar"
+    }).then((result) => {
+    if (result.isConfirmed) {
+        Swal.fire({
+        text: "Eliminaste todos los productos",
+        icon: "success"
+        });
+        carrito = []
+        actualizarCarrito()
+    }
     });
-    carrito = []
-    actualizarCarrito();
-  }
-});
-
 }
 
 function botonFinalizarCompra(){
-
     const contenedor = document.getElementById("finalizarCompra")
     contenedor.innerHTML = ""
 
@@ -189,22 +179,15 @@ function botonFinalizarCompra(){
         botonFinalizar.textContent="Finalizar Compra"
         contenedor.appendChild(botonFinalizar)
 
-        //-------------ESTE IF TENDRIA QUE HACERLO TERNARIO-----------------------------
-/*         if (carrito.length > 0) {
-            botonFinalizar.style.display = 'block';
-        } else {
-            botonFinalizar.style.display = 'none';
-        } */
-        botonFinalizar.style.display = carrito.length > 0 ? 'block' : 'none';
+        botonFinalizar.style.display = carrito.length > 0 ? 'block' : 'none'
 }
 
 function finalizarCompra() {
-
     let timerInterval;
     Swal.fire({
     title: "Gracias por tu compra!",
-    html: "Te enviamos un correo con informacion del envio de tus productos, Pronto podrás disfrutarlos",
-    timer: 5000,
+    html: "Te enviamos un correo para que sigas tu envio. <br><br> Serás redireccionado en <b></b> millisegundos.",
+    timer: 4000,
     timerProgressBar: true,
     didOpen: () => {
         Swal.showLoading();
@@ -223,11 +206,8 @@ function finalizarCompra() {
     });
 
     carrito = []
-    actualizarCarrito();
+    actualizarCarrito()
 }
-
-///////////////////FAVORITO/////////////////
-
 
 function guardarRecetasFavoritas(favoritas) {
     localStorage.setItem("favoritas", JSON.stringify(favoritas))
@@ -240,39 +220,28 @@ function obtenerRecetasFavoritas() {
 
 function toggleFavorito(nombreReceta) {
     let favoritas = obtenerRecetasFavoritas()
-    if (favoritas.includes(nombreReceta)) {
-        favoritas = favoritas.filter(nombre => nombre !== nombreReceta)
-    } else {
-        favoritas.push(nombreReceta)
-    }
+    favoritas.includes(nombreReceta) ? favoritas = favoritas.filter(nombre => nombre !== nombreReceta) : favoritas.push(nombreReceta);
     guardarRecetasFavoritas(favoritas)
 }
-
-
-
-
-
-
-///////////////////FILTRAR/////////////////
 
 function crearBotonesMenu() {
     const contenedor = document.getElementById("contenedor-menu")
     contenedor.innerHTML = ""
 
-        const botonMostrarTodos = document.createElement("button");
-        botonMostrarTodos.classList.add("rounded-pill", "btn", "btn-primary", "m-2");
-        botonMostrarTodos.textContent = "Todos";
-        contenedor.appendChild(botonMostrarTodos);
+        const botonMostrarTodos = document.createElement("button")
+        botonMostrarTodos.classList.add("rounded-pill", "btn", "btn-primary", "m-2")
+        botonMostrarTodos.textContent = "Todos"
+        contenedor.appendChild(botonMostrarTodos)
     
         botonMostrarTodos.addEventListener('click', () => {
-            crearBotonesDeRecetas(recetas);
-        });
+            crearBotonesDeRecetas(recetas)
+        })
 
     const tiposDeMenu = new Set();
 
     recetas.forEach(receta => {
         if (!tiposDeMenu.has(receta.tipoMenu)) {
-            tiposDeMenu.add(receta.tipoMenu);
+            tiposDeMenu.add(receta.tipoMenu)
 
    
         const botonMenu = document.createElement("button")
@@ -283,22 +252,16 @@ function crearBotonesMenu() {
 
         botonMenu.addEventListener('click', () => {
             const menuBuscado = receta.tipoMenu
-            const resultado = filtrarTipoMenu(menuBuscado);
+            const resultado = filtrarTipoMenu(menuBuscado)
             crearBotonesDeRecetas(resultado)
-
-        
             })
         }
-    });
+    })
 }
 
 function filtrarTipoMenu(menuBuscado) {
-    return recetas.filter(menu => menu.tipoMenu === menuBuscado);
+    return recetas.filter(menu => menu.tipoMenu === menuBuscado)
 }
-
-
-
-/////////////////77LIMPIAR MODAL//////////////////
 
 function limpiarModal(){
     document.getElementById("comensales").value = ""

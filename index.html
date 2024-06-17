@@ -3,44 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Recetas</title>
+    <title>Food Recipes</title>
     <script src="https://kit.fontawesome.com/197b21a5aa.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="./assets/favicon.ico">
 
 </head>
 <body>
 <main>
-<!-- Navbar Start -->
-<header>
-    <nav class="navbar navbar-expand-lg shadow navbar-light py-3 px-md-5 px-4 bg-dark-mode justify-content-between">
-        <h2 class="m-0">Food Recipes</h2>
-        <div class="">
+    <header>
+        <nav class="navbar navbar-expand-lg shadow navbar-light py-3 px-md-5 px-4 bg-dark-mode justify-content-between">
+          <h2 class="m-0 fw-bold">Food Recipes</h2>
+          <div>
             <button class="btnNone px-3"data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-cart-shopping"></i></button>
             <button class="btnNone px-3" id="toggleButton"><i class="fa-solid fa-moon"></i></button>
-        </div>
-    </nav>
-</header>
-    <!-- Navbar End -->
-
+          </div>
+        </nav>
+    </header>
     <section>
         <div class="container">
             <div id="contenedor-menu" class="my-4"></div>
-            <div class="row" id="contenedor">
-
-            </div>
+            <div class="row" id="contenedor"></div>
         </div>
     </section>
-    
-    <!--modal calculo de carrito-->
     <section>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content bg-dark-mode">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="recetaElegida">ACA VA NOMBRE DE RECETA</h5>
+                  <h5 class="modal-title" id="recetaElegida">nombre de receta</h5>
                   <button type="button" class="btnNone text-reset" data-bs-dismiss="modal" aria-label="Close">x</button>
                 </div>
                 <div class="modal-body">
@@ -57,8 +50,6 @@
             </div>
           </div>
     </section>
-
-    <!--offcanvas carrito-->
     <section>
         <div class="offcanvas offcanvas-end bg-dark-mode" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -74,14 +65,11 @@
             </div>
           </div>
     </section>
-
-
 </main>
 <script src="./js/main.js"></script>
 <script src="./js/darkMode.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
 </body>
 </html>

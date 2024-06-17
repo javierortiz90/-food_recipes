@@ -3,6 +3,7 @@
   {
     "nombre": "Risotto",
     "tipoMenu": "Cena",
+    "imagen": "./assets/risotto.webp",
     "ingredientes": [
       {
         "nombre": "Arroz",
@@ -24,6 +25,7 @@
   {
     "nombre": "Lasagna",
     "tipoMenu": "Cena",
+    "imagen": "./assets/lasagna.webp",
     "ingredientes": [
       {
         "nombre": "Pasta",
@@ -45,6 +47,7 @@
   {
     "nombre": "Pasta",
     "tipoMenu": "Cena",
+    "imagen": "./assets/pastaZucchini.webp",
     "ingredientes": [
       {
         "nombre": "Espagueti",
@@ -66,19 +69,20 @@
   {
     "nombre": "Torta",
     "tipoMenu": "Merienda",
+    "imagen": "./assets/torta.webp",
     "ingredientes": [
       {
-        "nombre": "Espagueti",
+        "nombre": "Harina",
         "cantidad": 100,
         "precio": 1.2
       },
       {
-        "nombre": "Salsa de tomate",
+        "nombre": "Manteca",
         "cantidad": 80,
         "precio": 0.8
       },
       {
-        "nombre": "Zucchini",
+        "nombre": "Huevos",
         "cantidad": 50,
         "precio": 1
       }
@@ -87,19 +91,20 @@
   {
     "nombre": "Paqueque",
     "tipoMenu": "Desayuno",
+    "imagen": "./assets/panqueques.webp",
     "ingredientes": [
       {
-        "nombre": "Espagueti",
+        "nombre": "Harina",
         "cantidad": 100,
         "precio": 1.2
       },
       {
-        "nombre": "Salsa de tomate",
+        "nombre": "Leche",
         "cantidad": 80,
         "precio": 0.8
       },
       {
-        "nombre": "Zucchini",
+        "nombre": "Huevos",
         "cantidad": 50,
         "precio": 1
       }
@@ -108,19 +113,20 @@
   {
     "nombre": "Carpaccio de Pepino",
     "tipoMenu": "Cena",
+    "imagen": "./assets/carpaccioPepino.webp",
     "ingredientes": [
       {
-        "nombre": "Sardinas",
-        "cantidad": 100,
+        "nombre": "Pepino",
+        "cantidad": 50,
         "precio": 1.2
       },
       {
         "nombre": "Queso de Cabra",
-        "cantidad": 75,
+        "cantidad": 20,
         "precio": 0.8
       },
       {
-        "nombre": "Alcaparras",
+        "nombre": "Sardinas",
         "cantidad": 20,
         "precio": 1
       }
@@ -129,6 +135,7 @@
   {
     "nombre": "Pure",
     "tipoMenu": "Cena",
+    "imagen": "./assets/purePapa.webp",
     "ingredientes": [
       {
         "nombre": "Papa",
@@ -145,6 +152,7 @@
   {
     "nombre": "Tarta",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/tarta.webp",
     "ingredientes": [
       {
         "nombre": "Jamon",
@@ -171,6 +179,7 @@
   {
     "nombre": "Ensalada con Naranja",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/ensaladaNaranja.webp",
     "ingredientes": [
       {
         "nombre": "Escarola",
@@ -197,6 +206,7 @@
   {
     "nombre": "Ensalada Cesar",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/ensaladaCesar.webp",
     "ingredientes": [
       {
         "nombre": "Pollo",
@@ -218,6 +228,7 @@
   {
     "nombre": "Crema de Zanahoria",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/cremaZanahoria.webp",
     "ingredientes": [
       {
         "nombre": "Zanahorias",
@@ -244,6 +255,7 @@
   {
     "nombre": "Puré de Coliflor",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/pureColiflor.webp",
     "ingredientes": [
       {
         "nombre": "Coliflor",
@@ -275,6 +287,7 @@
   {
     "nombre": "Ensalada de Pavo",
     "tipoMenu": "Almuerzo",
+    "imagen": "./assets/ensaladaPavo.webp",
     "ingredientes": [
       {
         "nombre": "Pavo",
@@ -301,6 +314,7 @@
   {
     "nombre": "Milhojas de frutas",
     "tipoMenu": "Postre",
+    "imagen": "./assets/milhojasFrutas.webp",
     "ingredientes": [
       {
         "nombre": "Sandia",
@@ -332,6 +346,7 @@
   {
     "nombre": "Muffins",
     "tipoMenu": "Desayuno",
+    "imagen": "./assets/muffins.webp",
     "ingredientes": [
       {
         "nombre": "Manteca",
@@ -363,6 +378,7 @@
   {
     "nombre": "Wafles",
     "tipoMenu": "Merienda",
+    "imagen": "./assets/wafles.webp",
     "ingredientes": [
       {
         "nombre": "Harina de Avena",
@@ -384,6 +400,7 @@
   {
     "nombre": "Trufas de Frambuesa",
     "tipoMenu": "Postre",
+    "imagen": "./assets/trufas.webp",
     "ingredientes": [
       {
         "nombre": "Chocolate Negro",
@@ -410,6 +427,7 @@
   {
     "nombre": "Galletas",
     "tipoMenu": "Merienda",
+    "imagen": "./assets/galletas.webp",
     "ingredientes": [
       {
         "nombre": "Harina",

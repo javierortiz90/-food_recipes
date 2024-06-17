@@ -20,6 +20,15 @@ input {
   border-bottom: 1px solid rgb(180, 180, 180);
   text-align: center;
   background-color: transparent;
+
+  &:focus{
+    outline: none;
+  }
+}
+
+button:focus, .btn:focus{
+  outline: 0;
+  box-shadow: none;
 }
 
 .btn-primary{
@@ -48,23 +57,18 @@ input {
   border: none;
 }
 
-.bg-img{
-  background-image: url(../assets/fondo.jpg);
-  background-size: cover;
-  background-position:center;
-}
-
 .objectFitCover {
   object-fit: cover;
+  background-size: cover;
+  background-position:center;
 }
  
 .boton-favorito {
   position: absolute;
   top: 5px;
   right: 10px;
-
   background-color: transparent;
-  color: grey;
+  color: white;
   border: none;
   cursor: pointer;
   font-size: 20px;
@@ -86,4 +90,8 @@ input {
 
 .modal-footer {
   border: none;
+}
+
+.card-height {
+  height: 95px;
 }
